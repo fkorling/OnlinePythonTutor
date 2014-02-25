@@ -266,14 +266,14 @@ ExecutionVisualizer.prototype.render = function() {
   var codeDisplayHTML =
     '<div id="codeDisplayDiv">\
        <div id="pyCodeOutputDiv"/>\
-       <div id="editCodeLinkDiv"><a id="editBtn">Edit code</a></div>\
+       <div id="editCodeLinkDiv"><a id="editBtn">Editera kod</a></div>\
        <div id="executionSlider"/>\
        <div id="vcrControls">\
-         <button id="jmpFirstInstr", type="button">&lt;&lt; First</button>\
-         <button id="jmpStepBack", type="button">&lt; Back</button>\
-         <span id="curInstr">Step ? of ?</span>\
-         <button id="jmpStepFwd", type="button">Forward &gt;</button>\
-         <button id="jmpLastInstr", type="button">Last &gt;&gt;</button>\
+         <button id="jmpFirstInstr", type="button">&lt;&lt; Första</button>\
+         <button id="jmpStepBack", type="button">&lt; Bakåt</button>\
+         <span id="curInstr">Steg ? av ?</span>\
+         <button id="jmpStepFwd", type="button">Framåt &gt;</button>\
+         <button id="jmpLastInstr", type="button">Sista &gt;&gt;</button>\
        </div>\
        <div id="errorOutput"/>\
        <div id="legendDiv"/>\
@@ -281,13 +281,13 @@ ExecutionVisualizer.prototype.render = function() {
          <textarea class="annotationText" id="stepAnnotationEditor" cols="60" rows="3"></textarea>\
          <div class="annotationText" id="stepAnnotationViewer"></div>\
        </div>\
-       <div id="annotateLinkDiv"><button id="annotateBtn" type="button">Annotate this step</button></div>\
+       <div id="annotateLinkDiv"><button id="annotateBtn" type="button">Annotera det här steget</button></div>\
      </div>';
 
   var outputsHTML =
     '<div id="htmlOutputDiv"></div>\
      <div id="progOutputs">\
-       Program output:<br/>\
+       Urskrift från programmet:<br/>\
        <textarea id="pyStdout" cols="50" rows="10" wrap="off" readonly></textarea>\
      </div>';
 
@@ -297,13 +297,13 @@ ExecutionVisualizer.prototype.render = function() {
          <tr>\
            <td id="stack_td">\
              <div id="globals_area">\
-               <div id="stackHeader">Frames</div>\
+               <div id="stackHeader">Stackpost</div>\
              </div>\
              <div id="stack"></div>\
            </td>\
            <td id="heap_td">\
              <div id="heap">\
-               <div id="heapHeader">Objects</div>\
+               <div id="heapHeader">Objekt</div>\
              </div>\
            </td>\
          </tr>\
@@ -346,8 +346,8 @@ ExecutionVisualizer.prototype.render = function() {
 
   if (this.params.arrowLines) {
       this.domRoot.find('#legendDiv')
-          .append('<svg id="prevLegendArrowSVG"/> line that has just executed')
-          .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> next line to execute</p>');
+          .append('<svg id="prevLegendArrowSVG"/> rad som just har exekverat')
+          .append('<p style="margin-top: 4px"><svg id="curLegendArrowSVG"/> nästa rad att exekvera</p>');
       
       myViz.domRootD3.select('svg#prevLegendArrowSVG')
           .append('polygon')
@@ -361,15 +361,15 @@ ExecutionVisualizer.prototype.render = function() {
   }
   else if (this.params.highlightLines) {
       myViz.domRoot.find('#legendDiv')
-          .append('<span class="highlight-legend highlight-prev">line that has just executed</span> ')
-          .append('<span class="highlight-legend highlight-cur">next line to execute</span>')
+          .append('<span class="highlight-legend highlight-prev">rad som just har exekverat</span> ')
+          .append('<span class="highlight-legend highlight-cur">nästa rad att exekvera</span>')
   }
   else if (this.params.pyCrazyMode) {
       myViz.domRoot.find('#legendDiv')
-          .append('<a href="https://github.com/pgbovine/Py2crazy">Py2crazy</a> mode!')
-          .append(' Stepping through (roughly) each executed expression. Color codes:<p/>')
-          .append('<span class="pycrazy-highlight-prev">expression that just executed</span><br/>')
-          .append('<span class="pycrazy-highlight-cur">next expression to execute</span>');
+          .append('<a href="https://github.com/pgbovine/Py2crazy">Py2crazy</a> läge!')
+          .append(' Steppa genom (grovt) varje exekverat uttryck. Färgkoder:<p/>')
+          .append('<span class="pycrazy-highlight-prev">uttryck som just har exevkerat</span><br/>')
+          .append('<span class="pycrazy-highlight-cur">nästa uttryck att exekvera</span>');
   }
 
 
@@ -417,7 +417,7 @@ ExecutionVisualizer.prototype.render = function() {
 
     // add an extra label to link back to the main site, so that viewers
     // on the embedded page know that they're seeing an OPT visualization
-    this.domRoot.find('#codeDisplayDiv').append('<div style="font-size: 8pt; margin-bottom: 20px;">Code visualized   with <a href="http://pythontutor.com" target="_blank">Online Python Tutor</a></div>');
+    this.domRoot.find('#codeDisplayDiv').append('<div style="font-size: 8pt; margin-bottom: 20px;">Kod visualiserad   med <a href="http://pythontutor.com" target="_blank">Online Python Tutor</a></div>');
   }
 
   myViz.editAnnotationMode = false;
@@ -431,14 +431,14 @@ ExecutionVisualizer.prototype.render = function() {
 
         myViz.domRoot.find("#jmpFirstInstr,#jmpLastInstr,#jmpStepBack,#jmpStepFwd,#executionSlider,#editCodeLinkDiv,#stepAnnotationViewer").show();
         myViz.domRoot.find('#stepAnnotationEditor').hide();
-        ab.html('Annotate this step');
+        ab.html('Annotera det här steget');
       }
       else {
         myViz.enterEditAnnotationsMode();
 
         myViz.domRoot.find("#jmpFirstInstr,#jmpLastInstr,#jmpStepBack,#jmpStepFwd,#executionSlider,#editCodeLinkDiv,#stepAnnotationViewer").hide();
         myViz.domRoot.find('#stepAnnotationEditor').show();
-        ab.html('Done annotating');
+        ab.html('Annotering klar');
       }
     });
   }
@@ -479,7 +479,7 @@ ExecutionVisualizer.prototype.render = function() {
   // (note that we need to keep #globals_area separate from #stack for d3 to work its magic)
   this.domRoot.find("#globals_area").append('<div class="stackFrame" id="'
     + myViz.generateID('globals') + '"><div id="' + myViz.generateID('globals_header')
-    + '" class="stackFrameHeader">Global frame</div><table class="stackFrameVarTable" id="'
+    + '" class="stackFrameHeader">Global stackpost</div><table class="stackFrameVarTable" id="'
     + myViz.generateID('global_table') + '"></table></div>');
 
 
@@ -1300,7 +1300,7 @@ ExecutionVisualizer.prototype.updateOutputFull = function(smoothTransition) {
 
   if (isLastInstr) {
     if (this.promptForUserInput || this.promptForMouseInput) {
-      vcrControls.find("#curInstr").html('<b><font color="' + brightRed + '">user input</font></b>');
+      vcrControls.find("#curInstr").html('<b><font color="' + brightRed + '">input</font></b>');
       // looks ugly when userInputPromptStr is TOO LONG
       //vcrControls.find("#curInstr").html('<b><font color="' + brightRed + '">' + this.userInputPromptStr + '</font></b>');
 
@@ -1309,16 +1309,16 @@ ExecutionVisualizer.prototype.updateOutputFull = function(smoothTransition) {
       smoothTransition = false;
     }
     else if (this.instrLimitReached) {
-      vcrControls.find("#curInstr").html("Instruction limit reached");
+      vcrControls.find("#curInstr").html("Gräns för instruktioner nådd");
     }
     else {
-      vcrControls.find("#curInstr").html("Program terminated");
+      vcrControls.find("#curInstr").html("Program terminerat");
     }
   }
   else {
-    vcrControls.find("#curInstr").html("Step " +
+    vcrControls.find("#curInstr").html("Steg " +
                                        String(this.curInstr + 1) +
-                                       " of " + String(totalInstrs-1));
+                                       " av " + String(totalInstrs-1));
   }
 
 
@@ -1347,7 +1347,7 @@ ExecutionVisualizer.prototype.updateOutputFull = function(smoothTransition) {
     assert(curEntry.exception_msg);
 
     if (curEntry.exception_msg == "Unknown error") {
-      myViz.domRoot.find("#errorOutput").html('Unknown error: Please email a bug report to philip@pgbovine.net');
+      myViz.domRoot.find("#errorOutput").html('Okänt fel: skicka e-mail med buggrapport till philip@pgbovine.net');
     }
     else {
       myViz.domRoot.find("#errorOutput").html(htmlspecialchars(curEntry.exception_msg));
@@ -2380,7 +2380,7 @@ ExecutionVisualizer.prototype.renderDataStructures = function(curEntry, curTople
           superclassStr += ('[extends ' + obj[2].join(', ') + '] ');
         }
         d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + obj[1] + ' class ' + superclassStr +
-                            '<br/>' + '<a href="#" id="attrToggleLink">hide attributes</a>' + '</div>');
+                            '<br/>' + '<a href="#" id="attrToggleLink">dölj attribut</a>' + '</div>');
       }
 
       // right now, let's NOT display class members, since that clutters
@@ -2454,12 +2454,12 @@ ExecutionVisualizer.prototype.renderDataStructures = function(curEntry, curTople
         // visualization session
         if (myViz.classAttrsHidden[d3DomElement.selector]) {
           $(d3DomElement.selector + ' .classTbl').hide();
-          $(d3DomElement.selector + ' .typeLabel #attrToggleLink').html('show attributes');
+          $(d3DomElement.selector + ' .typeLabel #attrToggleLink').html('visa attribut');
         }
       }
     }
     else if (obj[0] == 'INSTANCE_PPRINT') {
-      d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + obj[1] + ' instance</div>');
+      d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + obj[1] + ' instans</div>');
 
       strRepr = htmlspecialchars(obj[2]); // escape strings!
       d3DomElement.append('<table class="customObjTbl"><tr><td class="customObjElt">' + strRepr + '</td></tr></table>');
@@ -2472,7 +2472,7 @@ ExecutionVisualizer.prototype.renderDataStructures = function(curEntry, curTople
       var parentFrameID = obj[2]; // optional
 
       if (!myViz.compactFuncLabels) {
-        d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + 'function</div>');
+        d3DomElement.append('<div class="typeLabel">' + typeLabelPrefix + 'funktion</div>');
       }
 
       var funcPrefix = myViz.compactFuncLabels ? 'func' : '';
@@ -2816,7 +2816,7 @@ ExecutionVisualizer.prototype.renderDataStructures = function(curEntry, curTople
 
       if (i == 0) {
         if (varname == '__return__')
-          $(this).html('<span class="retval">Return<br/>value</span>');
+          $(this).html('<span class="retval">Returvärde</span>');
         else
           $(this).html(varname);
       }
@@ -3543,7 +3543,7 @@ function traceQCheckMe(inputId, divId, answer) {
    }
    feedbackElement = $("#" + divId + "_feedbacktext")
    if (ans.length > 0 && ans == correctAns) {
-       feedbackElement.html('Correct')
+       feedbackElement.html('Korrekt')
    } else {
        feedbackElement.html(vis.curTrace[i].question.feedback)
    }
