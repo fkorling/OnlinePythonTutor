@@ -319,12 +319,19 @@ ExecutionVisualizer.prototype.render = function() {
     </div>';
 
   if (this.params.verticalStack) {
-    this.domRoot.html(vizHeaderHTML + '<table border="0" class="visualizer"><tr><td class="vizLayoutTd" id="vizLayoutTdFirst"">' +
+   /* this.domRoot.html(vizHeaderHTML + '<table border="0" class="visualizer"><tr><td class="vizLayoutTd" id="vizLayoutTdFirst"">' +
+                      codeDisplayHTML + '</td></tr><tr><td class="vizLayoutTd" id="vizLayoutTdSecond">' +
+                      codeVizHTML + '</td></tr></table>'); */
+      this.domRoot.html('<table border="0" class="visualizer"><tr><td class="vizLayoutTd" id="vizLayoutTdFirst"">' +
                       codeDisplayHTML + '</td></tr><tr><td class="vizLayoutTd" id="vizLayoutTdSecond">' +
                       codeVizHTML + '</td></tr></table>');
   }
   else {
+   /*
     this.domRoot.html(vizHeaderHTML + '<table border="0" class="visualizer"><tr><td class="vizLayoutTd" id="vizLayoutTdFirst">' +
+                      codeDisplayHTML + '</td><td class="vizLayoutTd" id="vizLayoutTdSecond">' +
+                      codeVizHTML + '</td></tr></table>'); */
+    this.domRoot.html('<table border="0" class="visualizer"><tr><td class="vizLayoutTd" id="vizLayoutTdFirst">' +
                       codeDisplayHTML + '</td><td class="vizLayoutTd" id="vizLayoutTdSecond">' +
                       codeVizHTML + '</td></tr></table>');
   }
@@ -417,7 +424,7 @@ ExecutionVisualizer.prototype.render = function() {
 
     // add an extra label to link back to the main site, so that viewers
     // on the embedded page know that they're seeing an OPT visualization
-    this.domRoot.find('#codeDisplayDiv').append('<div style="font-size: 8pt; margin-bottom: 20px;">Kod visualiserad   med <a href="http://pythontutor.com" target="_blank">Online Python Tutor</a></div>');
+/*    this.domRoot.find('#codeDisplayDiv').append('<div style="font-size: 8pt; margin-bottom: 20px;">Kod visualiserad   med <a href="http://pythontutor.com" target="_blank">Online Python Tutor</a></div>'); */
   }
 
   myViz.editAnnotationMode = false;
