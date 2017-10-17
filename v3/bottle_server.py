@@ -8,21 +8,22 @@
 # easy_install pip
 # pip install bottle
 
-from bottle import route, get, request, run, template, static_file
-import cStringIO
+from bottle import Bottle, route, get, request, run, template, static_file
+from io import StringIO
 import json
 import pg_logger
 import urllib
-import urllib2
+import urllib.request
 
+app = Bottle()
 
-@route('/<filepath:path>')
+@app.route('/<filepath:path>')
 def index(filepath):
     return static_file(filepath, root='.')
 
-@get('/exec')
+@app.get('/exec')
 def get_exec():
-  out_s = cStringIO.StringIO()
+  out_s = StringIO()
 
   def json_finalizer(input_code, output_trace):
     ret = dict(code=input_code, trace=output_trace)
@@ -40,7 +41,7 @@ def get_exec():
   return out_s.getvalue()
 
 
-@get('/load_matrix_problem.py')
+@app.get('/load_matrix_problem.py')
 def load_matrix_problem():
   prob_name = request.query.problem_name
   assert type(prob_name) in (str, unicode)
@@ -65,7 +66,7 @@ def load_matrix_problem():
   return json.dumps(dict(code=cod, test=testCod))
 
 
-@get('/submit_matrix_problem.py')
+@app.get('/submit_matrix_problem.py')
 def submit_matrix_problem():
   user_code = request.query.submitted_code
   prob_name = request.query.problem_name
@@ -90,11 +91,11 @@ if n_fail == 0:
   values = {'user_script' : script}
 
   data = urllib.urlencode(values)
-  req = urllib2.Request(url, data)
-  response = urllib2.urlopen(req)
+  req = urllib.request.Request(url, data)
+  response = urllib.request.urlopen(req)
   the_page = response.read()
   return the_page
 
 
 if __name__ == "__main__":
-    run(host='localhost', port=8080, reloader=True)
+    app.run(host='localhost', port=8080, reloader=True)
