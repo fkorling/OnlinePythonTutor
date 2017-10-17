@@ -52,7 +52,7 @@ var python2crazy_backend_script = 'web_exec_py2-crazy.py';
 //var python2crazy_backend_script = 'exec';
 
 
-var domain = "http://pythontutor.com/"; // for deployment
+var domain = "https://api.patwic.com/pytutor/"; // for deployment
 //var domain = "http://localhost:8080/"; // for Google App Engine local testing
 
 
@@ -116,7 +116,7 @@ function executePythonCode(pythonSourceCode,
               else {
                 alert("Unknown error. Reload to try again," +
                       "or report a bug to philip@pgbovine.net\n\n" +
-                      "(Click the 'Generate URL' button to include a " + 
+                      "(Click the 'Generate URL' button to include a " +
                       "unique URL in your email bug report.)");
               }
             }
